@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-cream-bg: #FAF7F2;
+    --color-cream-surface: #FFFFFF;
+    --color-cream-card: #FFFDF9;
+    --color-cream-border: #E8DFD1;
+    --color-primary-navy: #1E3A8A;
+    --color-primary-blue: #2563EB;
+    --color-accent-amber: #D97706;
+    --color-text-dark: #1E293B;
+    --color-text-muted: #64748B;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    background-color: #FAF7F2;
+    color: #1E293B;
+    font-family: 'Hind Siliguri', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    background-color: #FAF7F2;
+    overflow-x: hidden;
+  }
+}
+
+/* Warm NGO subtle paper textures & card styling */
+.card-warm {
+  background-color: #FFFFFF;
+  border: 1px solid #E8DFD1;
+  box-shadow: 0 2px 8px -2px rgba(30, 41, 59, 0.05), 0 1px 4px -1px rgba(30, 41, 59, 0.03);
+}
+
+.card-warm-hover {
+  transition: all 0.25s ease-in-out;
+}
+.card-warm-hover:hover {
+  border-color: #CBD5E1;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.08), 0 8px 10px -6px rgba(30, 58, 138, 0.04);
+}
+
+/* Badge styles */
+.badge-blue {
+  background-color: #EFF6FF;
+  color: #1E40AF;
+  border: 1px solid #DBEAFE;
+}
+
+.badge-amber {
+  background-color: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.badge-green {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.badge-red {
+  background-color: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+}
+
+/* Custom Scrollbar for Warm Cream Palette */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Print specific styles for Member ID Cards */
+@media print {
+  body {
+    background-color: #FFFFFF !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
