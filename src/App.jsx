@@ -1,192 +1,97 @@
-import React, { useState, useEffect } from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { AboutSection } from './components/AboutSection';
-import { ActivitiesSection } from './components/ActivitiesSection';
-import { TimelineUpdates } from './components/TimelineUpdates';
-import { MembersDirectory } from './components/MembersDirectory';
-import { EmergencyBlood } from './components/EmergencyBlood';
-import { VideoGallery } from './components/VideoGallery';
-import { DonationSection } from './components/DonationSection';
-import { Footer } from './components/Footer';
+import React from 'react';
+import { ClinicalProvider, useClinical } from './context/ClinicalContext';
+import { TopRoleBar } from './components/Navigation/TopRoleBar';
+import { PatientPortal } from './components/Portals/PatientPortal';
+import { DoctorConsole } from './components/Portals/DoctorConsole';
+import { PharmacyHub } from './components/Portals/PharmacyHub';
+import { ResearchMatrix } from './components/Portals/ResearchMatrix';
+import { ShieldCheck, BookOpen, Activity, HeartPulse } from 'lucide-react';
 
-// Modals
-import { VideoPlayerModal } from './components/VideoPlayerModal';
-import { AddUpdateModal } from './components/AddUpdateModal';
-import { AddMemberModal } from './components/AddMemberModal';
-import { MemberIdModal } from './components/MemberIdModal';
-import { ActivityDetailModal } from './components/ActivityDetailModal';
-
-// Initial Datasets
-import { membersData } from './data/membersData';
-import { initialActivitiesData } from './data/activitiesData';
-
-export function App() {
-  // Members State with LocalStorage Persistence
-  const [members, setMembers] = useState(() => {
-    try {
-      const saved = localStorage.getItem('ybs_members_v1');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      }
-    } catch (e) {
-      console.error("Failed to load saved members:", e);
-    }
-    return membersData;
-  });
-
-  // Activities State with LocalStorage Persistence
-  const [activities, setActivities] = useState(() => {
-    try {
-      const saved = localStorage.getItem('ybs_activities_v1');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      }
-    } catch (e) {
-      console.error("Failed to load saved activities:", e);
-    }
-    return initialActivitiesData;
-  });
-
-  // Modal States
-  const [activeVideo, setActiveVideo] = useState(null); // { id, title }
-  const [selectedMember, setSelectedMember] = useState(null);
-  const [selectedActivity, setSelectedActivity] = useState(null);
-  const [isAddUpdateOpen, setIsAddUpdateOpen] = useState(false);
-  const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
-
-  // Sync to LocalStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('ybs_members_v1', JSON.stringify(members));
-    } catch (e) {
-      console.error(e);
-    }
-  }, [members]);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('ybs_activities_v1', JSON.stringify(activities));
-    } catch (e) {
-      console.error(e);
-    }
-  }, [activities]);
-
-  // Handlers
-  const handleAddActivity = (newActivity) => {
-    setActivities((prev) => [newActivity, ...prev]);
-  };
-
-  const handleAddMember = (newMember) => {
-    setMembers((prev) => [newMember, ...prev]);
-  };
-
-  const handleWatchVideo = (videoId, title) => {
-    setActiveVideo({ id: videoId, title: title || "কার্যক্রম ভিডিও ডকুমেন্টারি" });
-  };
+const MainLayout = () => {
+  const { activePortal, teamInfo, language } = useClinical();
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#1E293B] flex flex-col font-['Hind_Siliguri','Plus_Jakarta_Sans',sans-serif]">
-      
-      {/* Official Navigation Bar */}
-      <Navbar
-        onOpenMemberModal={() => setIsAddMemberOpen(true)}
-        onOpenDonateModal={() => {
-          const el = document.getElementById('donate');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }}
-      />
+    <div className="min-h-screen flex flex-col bg-[#F4F3EF] text-[#141817]">
+      {/* Live Perspective & Role Switcher Bar */}
+      <TopRoleBar />
 
-      {/* Main Content Area */}
-      <main className="flex-1">
-        {/* Hero Section */}
-        <Hero
-          onOpenMemberModal={() => setIsAddMemberOpen(true)}
-          onOpenAddUpdateModal={() => setIsAddUpdateOpen(true)}
-        />
-
-        {/* About Section */}
-        <AboutSection />
-
-        {/* Activities Section (Photos, Description, Filter, YouTube triggers) */}
-        <ActivitiesSection
-          activities={activities}
-          onWatchVideo={handleWatchVideo}
-          onOpenAddModal={() => setIsAddUpdateOpen(true)}
-          onSelectActivity={(act) => setSelectedActivity(act)}
-        />
-
-        {/* Interactive Chronological Timeline (2019 to 2026+ and Upcoming) */}
-        <TimelineUpdates
-          activities={activities}
-          onWatchVideo={handleWatchVideo}
-          onOpenAddModal={() => setIsAddUpdateOpen(true)}
-          onSelectActivity={(act) => setSelectedActivity(act)}
-        />
-
-        {/* 100 Members Directory with Search, Blood Filters, CSV Export, ID Modal */}
-        <MembersDirectory
-          members={members}
-          onSelectMember={(m) => setSelectedMember(m)}
-          onOpenAddMemberModal={() => setIsAddMemberOpen(true)}
-        />
-
-        {/* 24/7 Emergency Blood Donor Finder matching the 100 members */}
-        <EmergencyBlood members={members} />
-
-        {/* YouTube Video Documentation Archive */}
-        <VideoGallery
-          activities={activities}
-          onWatchVideo={handleWatchVideo}
-          onAddCustomVideo={handleAddActivity}
-        />
-
-        {/* Transparent Donation Section (bKash, Nagad, Bank info) */}
-        <DonationSection />
+      {/* Main View Area */}
+      <main className="flex-1 pb-12">
+        {activePortal === 'patient' && <PatientPortal />}
+        {activePortal === 'doctor' && <DoctorConsole />}
+        {activePortal === 'pharmacy' && <PharmacyHub />}
+        {activePortal === 'research' && <ResearchMatrix />}
       </main>
 
-      {/* Footer */}
-      <Footer />
+      {/* Academic Capstone & Research Grounding Footer */}
+      <footer className="bg-white border-t border-[#141817] py-8 text-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-6 border-b border-[#CFD2CE]">
+            {/* Col 1: Platform Overview */}
+            <div className="md:col-span-2 space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#0F6B53]" />
+                <span className="font-headline font-bold text-sm text-[#141817]">
+                  {teamInfo.projectTitle}
+                </span>
+              </div>
+              <p className="text-xs text-[#5A605D] max-w-xl leading-relaxed">
+                A closed-loop digital health ecosystem integrating Patients, Doctors, and Community Pharmacies in Bangladesh (LMICs) with rational antibiotic stewardship, shared EHR, and tele-triage.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1 font-mono text-[10px] text-[#5A605D]">
+                <span className="px-2 py-0.5 bg-[#F4F3EF] border border-[#CFD2CE] rounded">WHO AWaRe 2026</span>
+                <span className="px-2 py-0.5 bg-[#F4F3EF] border border-[#CFD2CE] rounded">DGDA E-Prescription</span>
+                <span className="px-2 py-0.5 bg-[#F4F3EF] border border-[#CFD2CE] rounded">WCAG AAA Contrast</span>
+              </div>
+            </div>
 
-      {/* Modals */}
-      {activeVideo && (
-        <VideoPlayerModal
-          videoId={activeVideo.id}
-          videoTitle={activeVideo.title}
-          onClose={() => setActiveVideo(null)}
-        />
-      )}
+            {/* Col 2: Capstone Team Identity */}
+            <div className="space-y-1.5">
+              <span className="font-mono text-[10px] font-bold uppercase text-[#5A605D] block">
+                CAPSTONE GROUP 3 AUTHORS
+              </span>
+              <ul className="space-y-1 font-medium text-[#141817]">
+                {teamInfo.members.map((m, idx) => (
+                  <li key={idx} className="flex items-center justify-between">
+                    <span>{m.name}</span>
+                    <span className="font-mono text-[10px] text-[#5A605D]">{m.id}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-      {selectedMember && (
-        <MemberIdModal
-          member={selectedMember}
-          onClose={() => setSelectedMember(null)}
-        />
-      )}
+            {/* Col 3: Research Foundations */}
+            <div className="space-y-1.5">
+              <span className="font-mono text-[10px] font-bold uppercase text-[#5A605D] block">
+                PRIMARY 2026 EVIDENCE
+              </span>
+              <ul className="space-y-1 text-[11px] text-[#5A605D]">
+                <li>• Ghosh et al., 2026 (PMLR 317)</li>
+                <li>• Klimentidis et al., 2026 (JPPP 19:1)</li>
+                <li>• Alshahrani et al., 2026 (JMDH 19)</li>
+              </ul>
+            </div>
+          </div>
 
-      {selectedActivity && (
-        <ActivityDetailModal
-          activity={selectedActivity}
-          onClose={() => setSelectedActivity(null)}
-          onWatchVideo={handleWatchVideo}
-        />
-      )}
-
-      <AddUpdateModal
-        isOpen={isAddUpdateOpen}
-        onClose={() => setIsAddUpdateOpen(false)}
-        onAddActivity={handleAddActivity}
-      />
-
-      <AddMemberModal
-        isOpen={isAddMemberOpen}
-        onClose={() => setIsAddMemberOpen(false)}
-        onAddMember={handleAddMember}
-      />
-
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] font-mono text-[#5A605D]">
+            <span>
+              Clinical Apothecary & Diagnostic Telemetry Workbench • Hand-Crafted Design System
+            </span>
+            <span>
+              Academic Session 2025–2026 • Verified Vercel Production Build
+            </span>
+          </div>
+        </div>
+      </footer>
     </div>
+  );
+};
+
+export function App() {
+  return (
+    <ClinicalProvider>
+      <MainLayout />
+    </ClinicalProvider>
   );
 }
 

@@ -2,96 +2,181 @@
 
 @layer base {
   :root {
-    --color-cream-bg: #FAF7F2;
-    --color-cream-surface: #FFFFFF;
-    --color-cream-card: #FFFDF9;
-    --color-cream-border: #E8DFD1;
-    --color-primary-navy: #1E3A8A;
-    --color-primary-blue: #2563EB;
-    --color-accent-amber: #D97706;
-    --color-text-dark: #1E293B;
-    --color-text-muted: #64748B;
+    --bg-base: #F4F3EF;
+    --surface-elevated: #FFFFFF;
+    --surface-recessed: #E8E6DF;
+    --text-primary: #141817;
+    --text-muted: #5A605D;
+    --border-hairline: #CFD2CE;
+    --border-strong: #141817;
+    --accent-emerald: #0F6B53;
+    --accent-emerald-subtle: #E6F3EE;
+    --accent-vermilion: #C84B24;
+    --accent-vermilion-subtle: #FAECE7;
+    --accent-amber: #B45309;
+    --accent-amber-subtle: #FEF3C7;
+
+    --font-display: 'Fraunces', 'Hind Siliguri', Georgia, serif;
+    --font-headline: 'Syne', 'Hind Siliguri', sans-serif;
+    --font-body: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'IBM Plex Mono', SFMono-Regular, Consolas, monospace;
   }
   
   html {
     scroll-behavior: smooth;
-    background-color: #FAF7F2;
-    color: #1E293B;
-    font-family: 'Hind Siliguri', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body);
+    background-color: var(--bg-base);
+    color: var(--text-primary);
   }
 
   body {
-    background-color: #FAF7F2;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
     overflow-x: hidden;
   }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .font-headline {
+    font-family: var(--font-headline);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* Clear, visible keyboard navigation */
+  :focus-visible {
+    outline: 2px solid var(--accent-emerald);
+    outline-offset: 2px;
+  }
 }
 
-/* Warm NGO subtle paper textures & card styling */
-.card-warm {
+/* Hard offset clinical shadow system */
+.clinical-card {
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  box-shadow: 2px 2px 0px var(--border-strong);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clinical-card-recessed {
+  background-color: var(--surface-recessed);
+  border: 1px solid var(--border-hairline);
+  border-radius: 6px;
+}
+
+.clinical-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+  transition: all 160ms ease;
+  min-height: 40px;
+}
+
+.clinical-btn-primary {
+  background-color: var(--accent-emerald);
+  color: #FFFFFF;
+  border-color: #0B4E3C;
+  box-shadow: 2px 2px 0px var(--border-strong);
+}
+
+.clinical-btn-primary:hover:not(:disabled) {
+  background-color: #0B4E3C;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--border-strong);
+}
+
+.clinical-btn-primary:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--border-strong);
+}
+
+.clinical-btn-danger {
+  background-color: var(--accent-vermilion);
+  color: #FFFFFF;
+  border-color: #9E3717;
+  box-shadow: 2px 2px 0px var(--border-strong);
+}
+
+.clinical-btn-danger:hover:not(:disabled) {
+  background-color: #9E3717;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--border-strong);
+}
+
+.clinical-btn-danger:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--border-strong);
+}
+
+.clinical-btn-secondary {
   background-color: #FFFFFF;
-  border: 1px solid #E8DFD1;
-  box-shadow: 0 2px 8px -2px rgba(30, 41, 59, 0.05), 0 1px 4px -1px rgba(30, 41, 59, 0.03);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  box-shadow: 2px 2px 0px var(--border-strong);
 }
 
-.card-warm-hover {
-  transition: all 0.25s ease-in-out;
-}
-.card-warm-hover:hover {
-  border-color: #CBD5E1;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.08), 0 8px 10px -6px rgba(30, 58, 138, 0.04);
+.clinical-btn-secondary:hover:not(:disabled) {
+  background-color: var(--surface-recessed);
+  transform: translate(-1px, -1px);
 }
 
-/* Badge styles */
-.badge-blue {
-  background-color: #EFF6FF;
-  color: #1E40AF;
-  border: 1px solid #DBEAFE;
+.clinical-btn-secondary:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--border-strong);
 }
 
-.badge-amber {
-  background-color: #FEF3C7;
-  color: #92400E;
-  border: 1px solid #FDE68A;
+.clinical-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
-.badge-green {
-  background-color: #ECFDF5;
-  color: #065F46;
-  border: 1px solid #A7F3D0;
+.clinical-input {
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  transition: border-color 160ms, box-shadow 160ms;
 }
 
-.badge-red {
-  background-color: #FEF2F2;
-  color: #991B1B;
-  border: 1px solid #FECACA;
+.clinical-input:focus {
+  border-color: var(--accent-emerald);
+  box-shadow: 0 0 0 1px var(--accent-emerald);
+  outline: none;
 }
 
-/* Custom Scrollbar for Warm Cream Palette */
+/* Custom telemetry scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF7F2;
+  background: var(--surface-recessed);
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 4px;
+  background: #B6B8B2;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
-}
-
-/* Print specific styles for Member ID Cards */
-@media print {
-  body {
-    background-color: #FFFFFF !important;
-  }
-  .no-print {
-    display: none !important;
-  }
-  .print-only {
-    display: block !important;
-  }
+  background: #8A8E89;
 }

@@ -1,92 +1,99 @@
-# ইয়ং বেঙ্গল সোসাইটি (Young Bengal Society) 🕊️
-### "তারুণ্যের শক্তিতে মানবতার কল্যাণে"
+# Unified Digital Healthcare Platform Connecting Patients, Doctors, and Community Pharmacies
 
-একটি সম্পূর্ণ, আধুনিক ও বাস্তবসম্মত স্বেচ্ছাসেবী সামাজিক সংগঠনের ওয়েবসাইট। কোনো কৃত্রিম এআই ভাইব, ডার্ক মোড বা গ্লাস নয়—বরং মার্জিত **ক্রিম ব্যাকগ্রাউন্ড (`#FAF7F2`)**, **রয়েল ট্রাস্ট ব্লু (`#1E3A8A`)** এবং সোনালী অ্যাকসেন্ট সমৃদ্ধ।
-
----
-
-## 🌟 প্রধান প্রধান বৈশিষ্ট্যসমূহ (Key Features)
-
-1. **সংস্থার পূর্ণাঙ্গ পরিচিতি ও লক্ষ্য (About Society)**:
-   - ২০১৯ সালের শীতকালীন প্রতিষ্ঠা থেকে শুরু করে বর্তমান সময় পর্যন্ত ইতিহাস, মূল নীতি ও ৫টি মূল স্তম্ভ।
-   - শতভাগ আর্থিক স্বচ্ছতা ও অডিট নিশ্চয়তা।
-
-2. **মাঠপর্যায়ের সকল মানবিক কার্যক্রম ও ফটো অ্যালবাম (Activities)**:
-   - মাহে রমজান খাদ্য সহায়তা ও ইফতার মাহফিল
-   - উত্তরাঞ্চলের তীব্র শীতে কম্বল ও উষ্ণ কাপড় বিতরণ
-   - বন্যা ও দুর্যোগকালীন জরুরি উদ্ধার অভিযান
-   - সুবিধাবঞ্চিত শিশুদের বর্ণমালা পাঠশালা ও স্কুলব্যাগ বিতরণ
-   - দেশব্যাপী ১০,০০০+ বৃক্ষরোপণ অভিযান
-   - ক্যাটাগরি অনুযায়ী ফিল্টারিং, সার্চিং এবং বিস্তারিত পপআপ মডাল।
-
-3. **ধারাবাহিক টাইমলাইন ও প্রতিদিনের লাইভ আপডেট (Live Timeline)**:
-   - ২০১৯ থেকে ২০২৬+ পর্যন্ত শুরু থেকে শেষ সব কাজের ক্রমানুসারে ধারাবাহিক টাইমলাইন।
-   - **আসন্ন কাজ (Upcoming Projects)**: ভবিষ্যতে কোন কাজ করা হবে তার আগাম নোটিফিকেশন।
-   - **নতুন আপডেট যুক্ত করার ব্যবস্থা**: নতুন কাজ সম্পন্ন হলে ওয়েবসাইটে সাথে সাথে ছবি, বিবরণ ও ইউটিউব লিংক যুক্ত করার ডাইনামিক ফর্ম।
-
-4. **ইউটিউব ভিডিও ডকুমেন্টারি আর্কাইভ (YouTube Video Showcase)**:
-   - সরাসরি ইউটিউব ভিডিও লিংক যুক্ত করার সুবিধা (`watch?v=...` বা `youtu.be/...`)।
-   - ওয়েবসাইটেই লাইটওয়েট ইউটিউব ভিডিও প্লেয়ারের মাধ্যমে ভিডিও দেখার মডাল।
-   - নতুন যেকোনো ইউটিউব ভিডিওর লিংক পেস্ট করলেই তা স্বয়ংক্রিয়ভাবে ভিডিও গ্যালারিতে যোগ হয়।
-
-5. **১০০ জন সদস্যের পূর্ণাঙ্গ ডাটাবেজ (100 Members Directory)**:
-   - ডেমো হিসেবে সম্পূর্ণ বাস্তবসম্মত ১০০ জন বাংলাদেশি সদস্য ও উপদেষ্টার পূর্ণাঙ্গ তালিকা।
-   - মেম্বার আইডি (`YBS-2019-001` থেকে `YBS-2026-100`)।
-   - নাম (বাংলা ও ইংরেজি), পদবি, উইং/কমিটি, রক্তের গ্রুপ, জেলা, উপজেলা, ফোন নম্বর, ইমেইল, যোগদানের বছর।
-   - সার্চ এবং রক্তের গ্রুপ, উইং ও জেলা ভিত্তিক ফিল্টারিং।
-   - গ্রিড ভিউ ও টেবিল ভিউ টগল।
-   - **এক্সেল / CSV ডাউনলোড**: এক ক্লিকে ১০০ সদস্যের তালিকা স্প্রেডশিট ফাইলে ডাউনলোড।
-   - **ডিজিটাল মেম্বার আইডি কার্ড**: অফিসিয়াল মেম্বার কার্ড ভিউ ও সরাসরি প্রিন্ট করার অপশন।
-   - নতুন সদস্য নিবন্ধন ফর্ম।
-
-6. **২৪ ঘণ্টা জরুরি রক্তদান সেল (Emergency Blood Finder)**:
-   - রক্তের গ্রুপ ও জেলা সিলেক্ট করলেই মুহূর্তেই ১০০ সদস্যের মধ্য থেকে রক্তদাতার ফোন নম্বর ও হোয়াটসঅ্যাপ লিংক খুঁজে বের করার ব্যবস্থা।
-
-7. **তহবিল ও অনুদান চ্যানেল (Donation & Accounts)**:
-   - বিকাশ (bKash), নগদ (Nagad), রকেট (Rocket) নম্বর এবং ১-ক্লিক নম্বর কপি বাটন।
-   - অফিসিয়াল ব্যাংক একাউন্ট বিবরণ (ইসলামী ব্যাংক)।
-   - কোন তহবিলে কত টাকা ব্যয় হয় তার বিবরণ।
+> **University Senior Capstone Project (Group 3)**  
+> **Academic Session:** 2025–2026  
+> **Target Domain:** Bangladesh & South Asian Low- and Middle-Income Countries (LMICs) with Southern European Primary Care Integration Models.
 
 ---
 
-## 🚀 লোকাল কম্পিউটারে রান করার নিয়ম (Local Run)
+## 👥 University Capstone Team (Group 3)
+1. **Md. Ibrahim Hussain** (Student ID: `242002129`) — *Clinical Systems Architect & Full-Stack Lead*
+2. **Md Leon Ahammed** (Student ID: `242002039`) — *AI Triage Engine & Telepharmacy Specialist*
+3. **Jakaria Hoque** (Student ID: `242002012`) — *Clinical Decision Support & Stewardship Analyst*
 
+---
+
+## 🎯 Core Research & Healthcare Objective
+To establish a closed-loop digital healthcare ecosystem connecting **Patients**, **Licensed Physicians**, and **Community Pharmacies** in low-resource settings (specifically Bangladesh), transforming community pharmacies from mere transactional medicine counters into integrated clinical care nodes and **rational antibiotic stewardship hubs**.
+
+---
+
+## 🏛️ 4 Live Synchronized Portals
+The platform features a persistent **Role & Perspective Switcher Bar** synchronized in real-time across browser tabs (`BroadcastChannel` API + `localStorage`):
+
+1. **Portal 01 — Patient Care & Hybrid AI Triage Portal**
+   - Symptom assessment in Bangla and English.
+   - Active verified e-Prescription wallet with Retina QR tokens and cryptographic digests.
+   - Day-3 / Day-5 Antibiotic Course Adherence Tracker with Adverse Drug Reaction (ADR) reporting.
+   - Nearby community pharmacy inventory and real-time price comparison in Bangladeshi Taka (`৳ BDT`).
+
+2. **Portal 02 — Doctor Telemedicine & Closed-Loop e-Prescription Console**
+   - Live incoming tele-triage consult queue from patient referrals and pharmacy counter walk-ins.
+   - Shared Longitudinal EHR Snapshot (eGFR, documented allergies like Penicillin, comorbidities, active meds).
+   - WHO AWaRe antibiotic prescription builder with real-time Clinical Decision Support (CDS) hard allergy & renal conflict alerts.
+   - Pharmacist Drug Therapy Problem (DTP) resolution desk.
+
+3. **Portal 03 — Community Pharmacy Clinical Hub & Antibiotic Stewardship Gate**
+   - **Mandatory Antibiotic Stewardship Lock:** Hard-locks Watch- and Reserve-class antibiotics requested without a doctor e-Prescription (`BLOCKED BY AMR STEWARDSHIP GUARDRAIL`).
+   - 1-Click Fast-Track Doctor Tele-Triage referral right at the counter.
+   - Pharmacist DTP flagging loop with direct doctor sign-off.
+   - DGDA bioequivalent generic substitution router (comparing brands and saving up to 61.6% in `৳ BDT`).
+   - Regional AMR surveillance telemetry strip.
+
+4. **Portal 04 — Capstone Literature Review & Research Evidence Matrix (10-Paper Tracker)**
+   - Pre-loaded with the 3 foundational 2026 research papers (Klimentidis et al., Alshahrani et al., Ghosh et al.).
+   - Interactive modal to add, document, and analyze Papers 4 through 10.
+   - 1-Click **Export to Markdown (`.md`)** and **Export to CSV (`.csv`)**.
+
+---
+
+## 📚 Grounded in Published 2026 Academic Literature
+1. **Klimentidis, D., Babar, Z. U. D., Petrides, M., & Peletidi, A. (2026).**  
+   *From transaction to transformation: a binational perspective on integrating community pharmacy into the digital health ecosystem of Southern European health systems.*  
+   *Journal of Pharmaceutical Policy and Practice*, 19(1), 2677777. [DOI: 10.1080/20523211.2026.2677777](https://doi.org/10.1080/20523211.2026.2677777)  
+   → **Implementation:** Shared Longitudinal EHR snapshot, bidirectional DTP loop, and generic substitution router (Features 3 & 4).
+
+2. **Alshahrani, A. M., Vasudevan, R., Hmlan, A., Assiri, A. M., Asiri, A. M., Asiri, O. A. M., & Mashni, A. A. (2026).**  
+   *Digital Transformation and Team-Based Care: Pharmacists in Multidisciplinary Models – A Narrative Review.*  
+   *Journal of Multidisciplinary Healthcare*, 19, 576298. [DOI: 10.2147/JMDH.S576298](https://doi.org/10.2147/JMDH.S576298)  
+   → **Implementation:** Automated CDS alert engine for DDI/allergies and Day-3/5 adherence & ADR follow-up (Features 3 & 5).
+
+3. **Ghosh, E., Rahman, M. J., Ahamed, S., Salwa, M., Foyez, T., & Mamun, K. A. (2026).**  
+   *Integrating AI-Driven Triage into Digital Pharmacy Systems for Rational Antibiotic Use in Low-Resource Settings.*  
+   *Proceedings of The Second AAAI Bridge Program on AI for Medicine and Healthcare, PMLR* 317:102–109. [PMLR:v317:ghosh26a](https://proceedings.mlr.press/v317/ghosh26a.html)  
+   → **Implementation:** Hybrid AI triage engine, mandatory WHO AWaRe Watch/Reserve lock, and regional AMR telemetry strip (Features 1 & 2).
+
+---
+
+## 🎨 Design Philosophy & Anti-AI-Slop Execution
+- **Design Archetype:** *"Clinical Apothecary & Diagnostic Telemetry Workbench"* inspired by Swiss pharmaceutical packaging, hospital bedside charts, and precision laboratory instruments.
+- **Color Palette (WCAG AAA Compliant):**
+  - Base Background: `#F4F3EF` (Sterile Warm Linen / Clinical Chart Paper)
+  - Diagnostic White Surface: `#FFFFFF` & Recessed Slot: `#E8E6DF`
+  - Deep Surgical Carbon Ink: `#141817` (>15:1 contrast)
+  - Clinical Pharmacy Emerald: `#0F6B53` (Verified safe dispensing)
+  - Triage Signal Vermilion: `#C84B24` (WHO Watch/Reserve lock & allergy alerts)
+- **Typographic Discipline:** Fraunces & Syne paired with Hind Siliguri (for Bangla clinical headings) + Plus Jakarta Sans + IBM Plex Mono (for Rx IDs, eGFR, doses, DOIs).
+- **Hard Anti-Cliché Guarantee:** Zero glassmorphism, zero purple gradients, zero fake badges, zero generic templates.
+
+---
+
+## 🚀 Running Locally & Deploying to Vercel
+
+### Development Server:
 ```bash
-# ডিপেনডেন্সি ইনস্টল করতে
 npm install
-
-# ডেভেলপমেন্ট সার্ভার চালু করতে
 npm run dev
 ```
-ব্রাউজারে দেখুন: `http://localhost:5173`
 
----
-
-## 🌐 Vercel-এ ফ্রিতে হোস্ট করার নিয়ম (How to Deploy on Vercel)
-
-প্রজেক্টে ইতিমধ্যেই `vercel.json` কনফিগার করা আছে। আপনি খুব সহজেই Vercel-এ এটি লাইভ করতে পারবেন:
-
-### পদ্ধতি ১: GitHub-এর মাধ্যমে (সবচেয়ে সহজ ও রিকমেন্ডেড)
-1. গিট ইনিশিয়ালাইজ ও কমিট করুন:
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: Young Bengal Society complete website ready for Vercel"
-   git branch -M main
-   git remote add origin https://github.com/<আপনার-ইউজারনেম>/<রেপো-নাম>.git
-   git push -u origin main
-   ```
-2. ব্রাউজারে [vercel.com](https://vercel.com) এ লগইন করে **"Add New Project"** এ যান।
-3. আপনার GitHub রিপোজিটরিটি সিলেক্ট করে **"Import"** চাপুন।
-4. ফ্রেমওয়ার্ক হিসেবে **Vite** স্বয়ংক্রিয়ভাবে সিলেক্ট থাকবে।
-5. **"Deploy"** বাটনে ক্লিক করুন। ৩০ সেকেন্ডের মধ্যে আপনার ওয়েবসাইট লাইভ হয়ে যাবে!
-
-### পদ্ধতি ২: Vercel CLI দিয়ে সরাসরি কমান্ড লাইন থেকে
+### Production Build:
 ```bash
-# গ্লোবালি ভেরসেল ইনস্টল না থাকলে
-npm i -g vercel
-
-# ডেপ্লয় রান করুন
-vercel
+npm run build
 ```
-পর্দায় আসা প্রশ্নগুলোতে Enter চাপলেই সরাসরি ডিপ্লয় হয়ে যাবে।
+
+### Deploy to Vercel:
+This repository includes a pre-configured `vercel.json` optimized for Vite SPAs:
+```bash
+vercel --prod
+```
+Or connect your GitHub repository directly to Vercel; it will detect Vite and build automatically into `dist/`.
