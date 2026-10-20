@@ -72,7 +72,6 @@ export const ResearchMatrix = () => {
       status: newStatus
     });
 
-    // Reset Form
     setNewTitle('');
     setNewCitation('');
     setNewJournal('');
@@ -98,18 +97,16 @@ export const ResearchMatrix = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
       {/* Capstone Team & Research Scope Banner */}
-      <section className="clinical-card p-5 bg-white border border-[#141817]">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-[#CFD2CE]">
+      <section className="clinical-card p-6 bg-white border border-slate-200">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-100">
           <div>
-            <div className="flex items-center gap-2 text-xs font-mono text-[#5A605D] uppercase tracking-wider mb-1">
-              <span>PORTAL 04</span>
-              <span>•</span>
-              <span className="font-bold text-[#0F6B53]">ACADEMIC LITERATURE REVIEW MATRIX</span>
+            <div className="flex items-center gap-2 text-xs font-semibold text-teal-700 uppercase tracking-wider mb-1">
+              <span>PORTAL 04 • ACADEMIC LITERATURE REVIEW MATRIX</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold font-display text-[#141817]">
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
               {teamInfo.projectTitle}
             </h1>
-            <p className="text-xs text-[#5A605D] mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               {teamInfo.academicTerm} • {teamInfo.institution}
             </p>
           </div>
@@ -118,7 +115,7 @@ export const ResearchMatrix = () => {
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={handleExportMarkdown}
-              className="clinical-btn clinical-btn-primary text-xs py-2 px-3 bg-[#0F6B53]"
+              className="clinical-btn clinical-btn-primary text-xs py-2 px-3.5 bg-teal-600 hover:bg-teal-700"
             >
               <Download className="w-4 h-4" />
               <span>Export Markdown (.md)</span>
@@ -126,18 +123,18 @@ export const ResearchMatrix = () => {
 
             <button
               onClick={handleExportCSV}
-              className="clinical-btn clinical-btn-secondary text-xs py-2 px-3"
+              className="clinical-btn clinical-btn-secondary text-xs py-2 px-3.5"
             >
-              <FileSpreadsheet className="w-4 h-4 text-[#0F6B53]" />
+              <FileSpreadsheet className="w-4 h-4 text-teal-600" />
               <span>Export CSV (.csv)</span>
             </button>
 
             <button
               onClick={() => setShowAddModal(true)}
-              className="clinical-btn clinical-btn-secondary text-xs py-2 px-3 border-[#141817] shadow-[2px_2px_0px_#141817]"
+              className="clinical-btn clinical-btn-secondary text-xs py-2 px-3.5 border-teal-600 text-teal-700 hover:bg-teal-50"
             >
               <Plus className="w-4 h-4" />
-              <span>+ Add Research Paper ({researchPapers.length}/10)</span>
+              <span>+ Add Paper ({researchPapers.length}/10)</span>
             </button>
           </div>
         </div>
@@ -145,12 +142,12 @@ export const ResearchMatrix = () => {
         {/* University Capstone Group 3 Authors Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4 text-xs">
           {teamInfo.members.map((member, idx) => (
-            <div key={idx} className="p-3 bg-[#F4F3EF] border border-[#CFD2CE] rounded">
-              <span className="font-mono text-[10px] text-[#5A605D] uppercase block">
+            <div key={idx} className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+              <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">
                 RESEARCHER {idx + 1} • ID: {member.id}
               </span>
-              <strong className="text-sm text-[#141817] block mt-0.5">{member.name}</strong>
-              <span className="text-[11px] text-[#0F6B53] font-semibold block mt-0.5">{member.role}</span>
+              <strong className="text-sm text-slate-900 block mt-0.5">{member.name}</strong>
+              <span className="text-xs text-teal-700 font-semibold block mt-0.5">{member.role}</span>
             </div>
           ))}
         </div>
@@ -159,7 +156,7 @@ export const ResearchMatrix = () => {
       {/* Search & Paper Counter Bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#5A605D]" />
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
             value={searchQuery}
@@ -169,36 +166,36 @@ export const ResearchMatrix = () => {
           />
         </div>
 
-        <span className="font-mono text-xs font-bold text-[#5A605D]">
+        <span className="text-xs font-semibold text-slate-600">
           Displaying {filteredPapers.length} of {researchPapers.length} Evidence Profiles (Target: 10 Papers)
         </span>
       </div>
 
       {/* Main Literature Review Evidence Cards Grid */}
-      <div className="space-y-5">
+      <div className="space-y-4">
         {filteredPapers.map((paper, idx) => (
           <article
             key={paper.id}
-            className="clinical-card p-5 bg-white border border-[#141817] shadow-[2px_2px_0px_#141817] hover:shadow-[3px_3px_0px_#141817] transition-all"
+            className="clinical-card p-6 bg-white border border-slate-200 shadow-2xs hover:shadow-md transition-all space-y-4"
           >
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 pb-3 border-b border-[#CFD2CE]">
+            <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 pb-3 border-b border-slate-100">
               <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="font-mono text-xs font-bold px-2 py-0.5 bg-[#141817] text-white rounded">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="font-mono text-xs font-bold px-2 py-0.5 bg-slate-900 text-white rounded-md">
                     {paper.id}
                   </span>
-                  <span className="font-mono text-xs text-[#5A605D]">
+                  <span className="text-xs text-slate-500 font-medium">
                     {paper.journal} ({paper.year})
                   </span>
-                  <span className="font-mono text-[10px] font-bold px-2 py-0.5 bg-[#E6F3EE] text-[#0F6B53] border border-[#0F6B53] rounded">
+                  <span className="text-[10px] font-semibold px-2 py-0.5 bg-teal-50 text-teal-700 border border-teal-200 rounded-md">
                     {paper.status}
                   </span>
                 </div>
 
-                <h2 className="text-base sm:text-lg font-bold font-display text-[#141817] leading-snug">
+                <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
                   {paper.title}
                 </h2>
-                <p className="text-xs text-[#5A605D] mt-0.5 font-medium">
+                <p className="text-xs text-slate-600 mt-0.5 font-medium">
                   {paper.citation}
                 </p>
               </div>
@@ -208,38 +205,38 @@ export const ResearchMatrix = () => {
                 href={paper.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F4F3EF] border border-[#141817] rounded text-xs font-mono font-bold text-[#141817] hover:bg-[#E8E6DF] transition-all shrink-0"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 hover:border-teal-500 hover:text-teal-700 rounded-lg text-xs font-mono font-semibold text-slate-700 transition-all shrink-0"
               >
                 <span>DOI: {paper.doi.length > 20 ? paper.doi.slice(0, 18) + '...' : paper.doi}</span>
-                <ExternalLink className="w-3.5 h-3.5 text-[#0F6B53]" />
+                <ExternalLink className="w-3.5 h-3.5 text-teal-600" />
               </a>
             </div>
 
-            {/* 3-Column Detailed Breakdown: Core Finding, Research Gap, Platform Implementation Mapping */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 text-xs">
-              <div className="p-3 bg-[#F4F3EF] border border-[#CFD2CE] rounded">
-                <span className="font-mono text-[10px] font-bold uppercase text-[#5A605D] block mb-1">
+            {/* 3-Column Detailed Breakdown */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
+              <div className="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1 tracking-wider">
                   CORE FINDING & EVIDENCE
                 </span>
-                <p className="text-[#141817] leading-relaxed">
+                <p className="text-slate-700 leading-relaxed">
                   {paper.coreFinding}
                 </p>
               </div>
 
-              <div className="p-3 bg-[#FAECE7] border border-[#C84B24]/40 rounded">
-                <span className="font-mono text-[10px] font-bold uppercase text-[#C84B24] block mb-1">
+              <div className="p-3.5 bg-rose-50/60 border border-rose-200/60 rounded-xl">
+                <span className="text-[10px] uppercase font-bold text-rose-600 block mb-1 tracking-wider">
                   IDENTIFIED RESEARCH GAP
                 </span>
-                <p className="text-[#141817] leading-relaxed">
+                <p className="text-slate-800 leading-relaxed">
                   {paper.researchGap}
                 </p>
               </div>
 
-              <div className="p-3 bg-[#E6F3EE] border border-[#0F6B53]/40 rounded">
-                <span className="font-mono text-[10px] font-bold uppercase text-[#0F6B53] block mb-1">
+              <div className="p-3.5 bg-teal-50/60 border border-teal-200/60 rounded-xl">
+                <span className="text-[10px] uppercase font-bold text-teal-700 block mb-1 tracking-wider">
                   HOW OUR PLATFORM IMPLEMENTS IT
                 </span>
-                <p className="text-[#141817] font-semibold leading-relaxed">
+                <p className="text-slate-900 font-semibold leading-relaxed">
                   {paper.platformMapping}
                 </p>
               </div>
@@ -248,28 +245,28 @@ export const ResearchMatrix = () => {
         ))}
       </div>
 
-      {/* Add Paper Modal / Form */}
+      {/* Add Paper Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white border-2 border-[#141817] rounded-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto shadow-[4px_4px_0px_#141817]">
-            <div className="flex items-center justify-between pb-3 border-b border-[#CFD2CE] mb-4">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+            <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
               <div className="flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-[#0F6B53]" />
-                <h3 className="font-headline font-bold text-lg text-[#141817]">
+                <BookOpen className="w-5 h-5 text-teal-600" />
+                <h3 className="font-bold text-lg text-slate-900">
                   Add Research Publication (Paper {researchPapers.length + 1} of 10)
                 </h3>
               </div>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="text-xs font-mono font-bold px-2 py-1 bg-[#F4F3EF] border border-[#141817] rounded hover:bg-[#E8E6DF]"
+                className="text-xs px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold"
               >
-                Close (ESC)
+                Close
               </button>
             </div>
 
             <form onSubmit={handleCreatePaper} className="space-y-4 text-xs">
               <div>
-                <label className="block font-semibold text-[#141817] mb-1">
+                <label className="block font-semibold text-slate-700 mb-1.5">
                   Full Paper Title
                 </label>
                 <input
@@ -284,7 +281,7 @@ export const ResearchMatrix = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-[#141817] mb-1">
+                  <label className="block font-semibold text-slate-700 mb-1.5">
                     Citation (Authors & Format)
                   </label>
                   <input
@@ -298,7 +295,7 @@ export const ResearchMatrix = () => {
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#141817] mb-1">
+                  <label className="block font-semibold text-slate-700 mb-1.5">
                     Journal / Conference Venue & Year
                   </label>
                   <input
@@ -313,7 +310,7 @@ export const ResearchMatrix = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-[#141817] mb-1">
+                  <label className="block font-semibold text-slate-700 mb-1.5">
                     DOI or Identifier
                   </label>
                   <input
@@ -326,7 +323,7 @@ export const ResearchMatrix = () => {
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#141817] mb-1">
+                  <label className="block font-semibold text-slate-700 mb-1.5">
                     Publication URL
                   </label>
                   <input
@@ -340,7 +337,7 @@ export const ResearchMatrix = () => {
               </div>
 
               <div>
-                <label className="block font-semibold text-[#141817] mb-1">
+                <label className="block font-semibold text-slate-700 mb-1.5">
                   Core Empirical Finding
                 </label>
                 <textarea
@@ -353,7 +350,7 @@ export const ResearchMatrix = () => {
               </div>
 
               <div>
-                <label className="block font-semibold text-[#141817] mb-1">
+                <label className="block font-semibold text-slate-700 mb-1.5">
                   Identified Research Gap in Prior Healthcare Systems
                 </label>
                 <textarea
@@ -366,7 +363,7 @@ export const ResearchMatrix = () => {
               </div>
 
               <div>
-                <label className="block font-semibold text-[#141817] mb-1">
+                <label className="block font-semibold text-slate-700 mb-1.5">
                   How Our Platform Solves / Maps to this Paper
                 </label>
                 <textarea
@@ -388,7 +385,7 @@ export const ResearchMatrix = () => {
                 </button>
                 <button
                   type="submit"
-                  className="clinical-btn clinical-btn-primary py-2 px-4 bg-[#0F6B53]"
+                  className="clinical-btn clinical-btn-primary py-2 px-4 bg-teal-600 hover:bg-teal-700"
                 >
                   Save & Insert into Matrix
                 </button>

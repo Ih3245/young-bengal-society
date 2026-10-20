@@ -2,76 +2,71 @@
 
 @layer base {
   :root {
-    --bg-base: #F4F3EF;
-    --surface-elevated: #FFFFFF;
-    --surface-recessed: #E8E6DF;
-    --text-primary: #141817;
-    --text-muted: #5A605D;
-    --border-hairline: #CFD2CE;
-    --border-strong: #141817;
-    --accent-emerald: #0F6B53;
-    --accent-emerald-subtle: #E6F3EE;
-    --accent-vermilion: #C84B24;
-    --accent-vermilion-subtle: #FAECE7;
-    --accent-amber: #B45309;
-    --accent-amber-subtle: #FEF3C7;
+    --bg-base: #F8FAFC;
+    --surface-card: #FFFFFF;
+    --surface-subtle: #F1F5F9;
+    --text-main: #0F172A;
+    --text-muted: #64748B;
+    --border-light: #E2E8F0;
+    --border-focus: #0D9488;
+    --teal-primary: #0F766E;
+    --teal-dark: #115E59;
+    --teal-light: #CCFBF1;
+    --teal-subtle: #F0FDFA;
+    --rose-alert: #E11D48;
+    --rose-subtle: #FFF1F2;
+    --amber-warning: #D97706;
+    --amber-subtle: #FFFBEB;
 
-    --font-display: 'Fraunces', 'Hind Siliguri', Georgia, serif;
-    --font-headline: 'Syne', 'Hind Siliguri', sans-serif;
-    --font-body: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: 'IBM Plex Mono', SFMono-Regular, Consolas, monospace;
+    --font-sans: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
   }
   
   html {
     scroll-behavior: smooth;
-    font-family: var(--font-body);
+    font-family: var(--font-sans);
     background-color: var(--bg-base);
-    color: var(--text-primary);
+    color: var(--text-main);
   }
 
   body {
     background-color: var(--bg-base);
-    color: var(--text-primary);
+    color: var(--text-main);
     margin: 0;
     padding: 0;
     line-height: 1.6;
     overflow-x: hidden;
   }
 
-  h1, h2, h3, .font-display {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-  }
-
-  .font-headline {
-    font-family: var(--font-headline);
-  }
-
   code, pre, .font-mono {
     font-family: var(--font-mono);
   }
 
-  /* Clear, visible keyboard navigation */
   :focus-visible {
-    outline: 2px solid var(--accent-emerald);
+    outline: 2px solid var(--teal-primary);
     outline-offset: 2px;
   }
 }
 
-/* Hard offset clinical shadow system */
+/* Modern, Clean & Polished Healthcare UI Components */
 .clinical-card {
-  background-color: var(--surface-elevated);
-  border: 1px solid var(--border-strong);
-  border-radius: 8px;
-  box-shadow: 2px 2px 0px var(--border-strong);
-  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.02);
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.clinical-card-recessed {
-  background-color: var(--surface-recessed);
-  border: 1px solid var(--border-hairline);
-  border-radius: 6px;
+.clinical-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 12px -2px rgb(0 0 0 / 0.05), 0 2px 6px -2px rgb(0 0 0 / 0.03);
+}
+
+.clinical-card-elevated {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
 }
 
 .clinical-btn {
@@ -82,87 +77,94 @@
   font-weight: 600;
   font-size: 0.875rem;
   padding: 8px 16px;
-  border-radius: 4px;
-  border: 1px solid var(--border-strong);
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 160ms ease;
+  transition: all 180ms ease;
   min-height: 40px;
 }
 
 .clinical-btn-primary {
-  background-color: var(--accent-emerald);
+  background-color: #0F766E;
   color: #FFFFFF;
-  border-color: #0B4E3C;
-  box-shadow: 2px 2px 0px var(--border-strong);
+  border: 1px solid #0D9488;
+  box-shadow: 0 1px 2px 0 rgb(15 118 110 / 0.2);
 }
 
 .clinical-btn-primary:hover:not(:disabled) {
-  background-color: #0B4E3C;
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px var(--border-strong);
+  background-color: #115E59;
+  box-shadow: 0 4px 10px 0 rgb(15 118 110 / 0.25);
+  transform: translateY(-1px);
 }
 
 .clinical-btn-primary:active:not(:disabled) {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px var(--border-strong);
-}
-
-.clinical-btn-danger {
-  background-color: var(--accent-vermilion);
-  color: #FFFFFF;
-  border-color: #9E3717;
-  box-shadow: 2px 2px 0px var(--border-strong);
-}
-
-.clinical-btn-danger:hover:not(:disabled) {
-  background-color: #9E3717;
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px var(--border-strong);
-}
-
-.clinical-btn-danger:active:not(:disabled) {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px var(--border-strong);
+  transform: translateY(0);
 }
 
 .clinical-btn-secondary {
   background-color: #FFFFFF;
-  color: var(--text-primary);
-  border: 1px solid var(--border-strong);
-  box-shadow: 2px 2px 0px var(--border-strong);
+  color: #0F172A;
+  border: 1px solid #CBD5E1;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.04);
 }
 
 .clinical-btn-secondary:hover:not(:disabled) {
-  background-color: var(--surface-recessed);
-  transform: translate(-1px, -1px);
+  background-color: #F8FAFC;
+  border-color: #94A3B8;
+  transform: translateY(-1px);
 }
 
-.clinical-btn-secondary:active:not(:disabled) {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px var(--border-strong);
+.clinical-btn-danger {
+  background-color: #E11D48;
+  color: #FFFFFF;
+  border: 1px solid #BE123C;
+  box-shadow: 0 1px 2px 0 rgb(225 29 72 / 0.2);
 }
 
-.clinical-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
+.clinical-btn-danger:hover:not(:disabled) {
+  background-color: #BE123C;
+  transform: translateY(-1px);
 }
 
 .clinical-input {
   background-color: #FFFFFF;
-  border: 1px solid var(--border-strong);
-  border-radius: 4px;
-  padding: 8px 12px;
+  border: 1px solid #CBD5E1;
+  border-radius: 10px;
+  padding: 8px 14px;
   font-size: 0.875rem;
-  color: var(--text-primary);
-  transition: border-color 160ms, box-shadow 160ms;
+  color: #0F172A;
+  transition: all 180ms ease;
 }
 
 .clinical-input:focus {
-  border-color: var(--accent-emerald);
-  box-shadow: 0 0 0 1px var(--accent-emerald);
+  border-color: #0D9488;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
   outline: none;
+}
+
+/* Print Styles for Official Prescription Slip */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-prescription,
+  #printable-prescription * {
+    visibility: visible;
+  }
+  #printable-prescription {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 24px;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .no-print {
+    display: none !important;
+  }
 }
 
 /* Custom telemetry scrollbar */
@@ -171,12 +173,12 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--surface-recessed);
+  background: #F1F5F9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #B6B8B2;
-  border-radius: 3px;
+  background: #CBD5E1;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #8A8E89;
+  background: #94A3B8;
 }

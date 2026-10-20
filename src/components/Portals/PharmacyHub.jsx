@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useClinical } from '../../context/ClinicalContext';
 import { AwareBadge } from '../Common/AwareBadge';
 import { RxQrCode } from '../Common/RxQrCode';
+import { PrescriptionPrintModal } from '../Common/PrescriptionPrintModal';
 import {
   Pill,
   Lock,
@@ -17,7 +18,9 @@ import {
   TrendingUp,
   Activity,
   FileCheck,
-  Check
+  Check,
+  Printer,
+  Download
 } from 'lucide-react';
 
 export const PharmacyHub = () => {
@@ -45,6 +48,9 @@ export const PharmacyHub = () => {
   const [teleTriageInitiated, setTeleTriageInitiated] = useState(false);
   const [selectedGenericSub, setSelectedGenericSub] = useState(null);
 
+  // Modal for viewing & printing prescription
+  const [selectedRxForPrint, setSelectedRxForPrint] = useState(null);
+
   // Filter pending prescriptions ready for pharmacy review
   const pendingRxForDispensing = prescriptions.filter(
     (rx) => rx.status === 'ISSUED' || rx.status === 'APPROVED_MODIFIED'
@@ -68,7 +74,6 @@ export const PharmacyHub = () => {
 
   const isDispenseUnlocked = !isStewardshipRestricted || matchingValidRx;
 
-  // Handle Walk-In Tele-Triage Handshake
   const handleInitiateWalkInTriage = () => {
     submitTriageCase({
       feverDays: 3,
@@ -87,30 +92,28 @@ export const PharmacyHub = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
       {/* Pharmacy Identity Header */}
-      <section className="clinical-card p-4 sm:p-5 bg-white border border-[#141817]">
+      <section className="clinical-card p-5 sm:p-6 bg-white border border-slate-200">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded bg-[#0F6B53] flex items-center justify-center text-white border border-[#141817]">
-              <Building2 className="w-5 h-5" />
+          <div className="flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-xl bg-teal-600 flex items-center justify-center text-white shadow-sm">
+              <Building2 className="w-6 h-6" />
             </div>
             <div>
-              <div className="flex items-center gap-2 text-xs font-mono text-[#5A605D] uppercase tracking-wider">
-                <span>PORTAL 03</span>
-                <span>•</span>
-                <span className="font-bold text-[#0F6B53]">COMMUNITY PHARMACY CLINICAL HUB</span>
+              <div className="flex items-center gap-2 text-xs font-semibold text-teal-700 tracking-wider uppercase mb-0.5">
+                <span>PORTAL 03 • COMMUNITY PHARMACY CLINICAL HUB</span>
               </div>
-              <h1 className="text-xl sm:text-2xl font-bold font-display text-[#141817]">
+              <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
                 {activePharmacy.name}
               </h1>
-              <p className="text-xs text-[#5A605D]">
-                Lic: <span className="font-mono font-bold text-[#141817]">{activePharmacy.licenseNo}</span> • Pharmacist: {activePharmacy.pharmacistInCharge} • {activePharmacy.address}
+              <p className="text-xs text-slate-500 mt-0.5">
+                License: <span className="font-mono font-bold text-slate-800">{activePharmacy.licenseNo}</span> • Pharmacist: {activePharmacy.pharmacistInCharge} • {activePharmacy.address}
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-xs font-mono font-bold px-3 py-1.5 bg-[#E6F3EE] text-[#0F6B53] border border-[#0F6B53] rounded flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4" />
+            <span className="text-xs font-semibold px-3 py-1.5 bg-teal-50 text-teal-800 border border-teal-200 rounded-lg flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-teal-600" />
               <span>WHO STEWARDSHIP GATE: ACTIVE</span>
             </span>
           </div>
@@ -118,56 +121,56 @@ export const PharmacyHub = () => {
       </section>
 
       {/* Feature 5: Regional AMR Surveillance & Stewardship Impact Telemetry Strip */}
-      <section className="clinical-card p-4 bg-[#141817] text-white border border-[#141817] shadow-[2px_2px_0px_#0F6B53]">
-        <div className="flex items-center justify-between pb-2 mb-3 border-b border-[#5A605D] text-xs">
+      <section className="clinical-card p-5 bg-slate-900 text-white border border-slate-800 shadow-md">
+        <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800 text-xs">
           <div className="flex items-center gap-2 font-mono">
-            <Activity className="w-4 h-4 text-[#0F6B53] animate-pulse" />
-            <span className="font-bold text-[#E6F3EE]">REGIONAL AMR & STEWARDSHIP IMPACT TELEMETRY</span>
+            <Activity className="w-4 h-4 text-teal-400 animate-pulse" />
+            <span className="font-bold text-teal-200">REGIONAL AMR & STEWARDSHIP IMPACT TELEMETRY</span>
           </div>
-          <span className="text-[10px] font-mono text-[#CFD2CE]">
+          <span className="text-[10px] text-slate-400">
             BENCHMARKED AGAINST GHOSH ET AL., 2026 (BANGLADESH TRIAL)
           </span>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-          <div className="p-2.5 bg-[#1E2422] rounded border border-[#5A605D]/50">
-            <span className="text-[10px] font-mono text-[#CFD2CE] block uppercase">
+          <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700/60">
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">
               Non-Rx Self-Medication
             </span>
-            <span className="font-mono text-lg font-bold text-[#0F6B53] block mt-0.5">
+            <span className="text-lg font-bold text-teal-400 block mt-0.5">
               4.05% → 0.86%
             </span>
-            <span className="text-[9px] text-[#CFD2CE]">78.8% reduction via gate</span>
+            <span className="text-[10px] text-slate-400">78.8% reduction via gate</span>
           </div>
 
-          <div className="p-2.5 bg-[#1E2422] rounded border border-[#5A605D]/50">
-            <span className="text-[10px] font-mono text-[#CFD2CE] block uppercase">
+          <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700/60">
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">
               Rx-Backed Dispensing
             </span>
-            <span className="font-mono text-lg font-bold text-[#0F6B53] block mt-0.5">
+            <span className="text-lg font-bold text-teal-400 block mt-0.5">
               27.6% → 43.5%+
             </span>
-            <span className="text-[9px] text-[#CFD2CE]">Verified closed loop</span>
+            <span className="text-[10px] text-slate-400">Verified closed loop</span>
           </div>
 
-          <div className="p-2.5 bg-[#1E2422] rounded border border-[#5A605D]/50">
-            <span className="text-[10px] font-mono text-[#CFD2CE] block uppercase">
+          <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700/60">
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">
               Resolved DTP Interventions
             </span>
-            <span className="font-mono text-lg font-bold text-[#E6F3EE] block mt-0.5">
+            <span className="text-lg font-bold text-white block mt-0.5">
               {stewardshipStats.resolvedDtps} Cases
             </span>
-            <span className="text-[9px] text-[#CFD2CE]">Renal & allergy saves</span>
+            <span className="text-[10px] text-slate-400">Renal & allergy saves</span>
           </div>
 
-          <div className="p-2.5 bg-[#1E2422] rounded border border-[#5A605D]/50">
-            <span className="text-[10px] font-mono text-[#CFD2CE] block uppercase">
+          <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700/60">
+            <span className="text-[10px] text-slate-400 block uppercase tracking-wider">
               Stewardship Locks Enforced
             </span>
-            <span className="font-mono text-lg font-bold text-[#C84B24] block mt-0.5">
+            <span className="text-lg font-bold text-rose-400 block mt-0.5">
               {stewardshipStats.stewardshipLocksEnforced} Blocked
             </span>
-            <span className="text-[9px] text-[#CFD2CE]">Watch/Reserve retail stops</span>
+            <span className="text-[10px] text-slate-400">Watch/Reserve retail stops</span>
           </div>
         </div>
       </section>
@@ -176,33 +179,34 @@ export const PharmacyHub = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* LEFT COLUMN: Feature 2 Mandatory Antibiotic Stewardship Lock */}
         <div className="lg:col-span-6 space-y-6">
-          <section className="clinical-card p-5 bg-white border border-[#141817]">
-            <div className="flex items-center justify-between pb-3 border-b border-[#CFD2CE] mb-4">
-              <div className="flex items-center gap-2">
-                <Lock className="w-5 h-5 text-[#C84B24]" />
+          <section className="clinical-card p-6 bg-white border border-slate-200">
+            <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+                  <Lock className="w-5 h-5" />
+                </div>
                 <div>
-                  <h2 className="font-headline font-bold text-base text-[#141817]">
-                    Walk-In Counter Antimicrobial Stewardship Gate
+                  <h2 className="font-bold text-lg text-slate-900">
+                    Counter Antimicrobial Stewardship Gate
                   </h2>
-                  <p className="text-[11px] font-mono text-[#5A605D]">
+                  <p className="text-xs text-slate-500">
                     Grounded in Ghosh et al., 2026 (PMLR 317)
                   </p>
                 </div>
               </div>
 
-              <span className="text-[10px] font-mono px-2 py-0.5 bg-[#FAECE7] text-[#C84B24] border border-[#C84B24] font-bold rounded">
+              <span className="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 border border-rose-200 rounded-lg">
                 MANDATORY LOCK
               </span>
             </div>
 
-            <p className="text-xs text-[#5A605D] leading-relaxed mb-4">
+            <p className="text-xs text-slate-600 leading-relaxed mb-4">
               Simulate a walk-in patient requesting antibiotics without a verified e-Prescription. Watch- and Reserve-class antimicrobials are hard-locked by the stewardship gate, requiring a 1-click tele-triage referral.
             </p>
 
-            <div className="space-y-4 p-4 bg-[#F4F3EF] border border-[#CFD2CE] rounded">
-              {/* Patient Selector */}
+            <div className="space-y-4 p-4 bg-slate-50 border border-slate-200 rounded-xl">
               <div>
-                <label className="block text-xs font-semibold text-[#141817] mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Walk-In Patient Name
                 </label>
                 <select
@@ -218,9 +222,8 @@ export const PharmacyHub = () => {
                 </select>
               </div>
 
-              {/* Requested Antimicrobial Drug */}
               <div>
-                <label className="block text-xs font-semibold text-[#141817] mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Antimicrobial Agent Requested at Counter
                 </label>
                 <div className="flex items-center gap-2">
@@ -247,9 +250,8 @@ export const PharmacyHub = () => {
                 </div>
               </div>
 
-              {/* Verified Rx Token input */}
               <div>
-                <label className="block text-xs font-semibold text-[#141817] mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Doctor e-Prescription Token (Optional for Test)
                 </label>
                 <input
@@ -263,41 +265,40 @@ export const PharmacyHub = () => {
 
               {/* Stewardship Verdict & Lock Status */}
               <div
-                className={`p-3.5 rounded border text-xs ${
+                className={`p-4 rounded-xl border text-xs ${
                   isDispenseUnlocked
-                    ? 'bg-[#E6F3EE] border-[#0F6B53]'
-                    : 'bg-[#FAECE7] border-[#C84B24]'
+                    ? 'bg-teal-50 border-teal-200 text-teal-950'
+                    : 'bg-rose-50 border-rose-200 text-rose-950'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 font-bold">
                     {isDispenseUnlocked ? (
                       <>
-                        <Unlock className="w-4 h-4 text-[#0F6B53]" />
-                        <span className="text-[#0F6B53]">DISPENSING AUTHORIZED BY VALID RX TOKEN</span>
+                        <Unlock className="w-4 h-4 text-teal-600" />
+                        <span className="text-teal-800">DISPENSING AUTHORIZED BY VALID RX TOKEN</span>
                       </>
                     ) : (
                       <>
-                        <Lock className="w-4 h-4 text-[#C84B24]" />
-                        <span className="text-[#C84B24]">BLOCKED BY AMR STEWARDSHIP GUARDRAIL</span>
+                        <Lock className="w-4 h-4 text-rose-600" />
+                        <span className="text-rose-700 font-bold">BLOCKED BY AMR STEWARDSHIP GUARDRAIL</span>
                       </>
                     )}
                   </div>
                 </div>
 
-                <p className="text-[11px] text-[#141817] mt-1.5 leading-relaxed">
+                <p className="text-xs mt-2 leading-relaxed font-medium">
                   {isDispenseUnlocked
-                    ? `Prescription token validated. Pharmacist is legally clear to dispense ${walkInRequestedDrug}.`
-                    : `Selling ${walkInRequestedDrug} (${requestedDrugClass} class) without a doctor e-Prescription is strictly prohibited to combat AMR in South Asia. Initiate doctor tele-triage below.`}
+                    ? `Prescription token validated. Pharmacist is authorized to dispense ${walkInRequestedDrug}.`
+                    : `Selling ${walkInRequestedDrug} (${requestedDrugClass} class) without a doctor e-Prescription is strictly blocked to stop AMR emergence in South Asia. Initiate doctor tele-triage below.`}
                 </p>
 
-                {/* 1-Click Fast-Track Tele-Triage Button */}
                 {!isDispenseUnlocked && (
-                  <div className="mt-3 pt-2 border-t border-[#C84B24]/30 flex flex-col sm:flex-row gap-2">
+                  <div className="mt-3.5 pt-3 border-t border-rose-200 flex flex-col sm:flex-row gap-2">
                     <button
                       type="button"
                       onClick={handleInitiateWalkInTriage}
-                      className="clinical-btn clinical-btn-primary flex-1 py-1.5 text-xs bg-[#0F6B53]"
+                      className="clinical-btn clinical-btn-primary flex-1 py-1.5 text-xs bg-teal-600 hover:bg-teal-700"
                     >
                       <Stethoscope className="w-3.5 h-3.5" />
                       <span>Initiate Fast-Track Doctor Tele-Triage</span>
@@ -314,9 +315,9 @@ export const PharmacyHub = () => {
                 )}
 
                 {teleTriageInitiated && (
-                  <div className="mt-2 text-[11px] font-bold text-[#0F6B53] flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Case routed live to Doctor Console queue. Doctor notification dispatched.</span>
+                  <div className="mt-2 text-xs font-bold text-teal-700 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Case routed live to Doctor Console queue. Doctor notified.</span>
                   </div>
                 )}
               </div>
@@ -324,15 +325,17 @@ export const PharmacyHub = () => {
           </section>
 
           {/* Feature 3: Pharmacist DTP Alert Flagging Desk */}
-          <section className="clinical-card p-5 bg-white border border-[#141817]">
-            <div className="flex items-center justify-between pb-3 border-b border-[#CFD2CE] mb-4">
-              <div className="flex items-center gap-2">
-                <ShieldAlert className="w-5 h-5 text-[#C84B24]" />
+          <section className="clinical-card p-6 bg-white border border-slate-200">
+            <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+                  <ShieldAlert className="w-5 h-5" />
+                </div>
                 <div>
-                  <h2 className="font-headline font-bold text-base text-[#141817]">
+                  <h2 className="font-bold text-lg text-slate-900">
                     Pharmacist Drug Therapy Problem (DTP) Desk
                   </h2>
-                  <p className="text-[11px] font-mono text-[#5A605D]">
+                  <p className="text-xs text-slate-500">
                     Grounded in Alshahrani et al., 2026 & Klimentidis et al., 2026
                   </p>
                 </div>
@@ -342,37 +345,32 @@ export const PharmacyHub = () => {
             <div className="space-y-3">
               {pendingRxForDispensing.map((rx) => {
                 const targetPatient = patients.find(p => p.id === rx.patientId);
-                const hasPenicillinConflict =
-                  targetPatient?.allergies.some(a => a.toLowerCase().includes('penicillin')) &&
-                  rx.medications.some(m => m.name.toLowerCase().includes('amoxicillin'));
-
                 const hasRenalImpairment = (targetPatient?.vitals.eGFR || 100) < 50;
 
                 return (
                   <div
                     key={rx.id}
-                    className="p-3.5 bg-[#F4F3EF] border border-[#141817] rounded text-xs space-y-2"
+                    className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-2 hover:border-slate-300 transition-all shadow-2xs"
                   >
                     <div className="flex items-start justify-between">
                       <div>
-                        <span className="font-mono font-bold text-[#141817] block">{rx.id}</span>
-                        <span className="text-[#5A605D]">Patient: {rx.patientName}</span>
+                        <span className="font-mono font-bold text-slate-900 block">{rx.id}</span>
+                        <span className="text-slate-500">Patient: {rx.patientName}</span>
                       </div>
-                      <span className="font-mono text-[10px] font-bold px-2 py-0.5 bg-white border border-[#CFD2CE] rounded">
+                      <span className="font-mono text-[10px] font-bold px-2 py-0.5 bg-white border border-slate-200 rounded-md">
                         {rx.status}
                       </span>
                     </div>
 
-                    <div className="p-2 bg-white rounded border border-[#CFD2CE]">
-                      <span className="font-bold text-[#141817] block">
+                    <div className="p-3 bg-white rounded-lg border border-slate-200">
+                      <span className="font-bold text-slate-900 block">
                         Rx: {rx.medications[0]?.name} ({rx.medications[0]?.dosage})
                       </span>
-                      <span className="text-[11px] text-[#5A605D] block mt-0.5">
+                      <span className="text-[11px] text-slate-500 block mt-0.5">
                         Patient eGFR: {targetPatient?.vitals.eGFR} mL/min | Allergies: {targetPatient?.allergies.join(', ')}
                       </span>
                     </div>
 
-                    {/* Flag DTP Action */}
                     <div className="pt-1 flex items-center justify-between gap-2">
                       <button
                         type="button"
@@ -385,10 +383,19 @@ export const PharmacyHub = () => {
                             recommendedAction: 'Reduce dose by 50% or change agent.'
                           });
                         }}
-                        className="clinical-btn clinical-btn-danger flex-1 py-1 text-xs"
+                        className="clinical-btn clinical-btn-danger flex-1 py-1.5 text-xs"
                       >
                         <AlertTriangle className="w-3.5 h-3.5" />
                         <span>Flag DTP & Request Physician Modification</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setSelectedRxForPrint(rx)}
+                        className="clinical-btn clinical-btn-secondary text-xs px-3"
+                      >
+                        <Printer className="w-3.5 h-3.5" />
+                        <span>View Rx</span>
                       </button>
                     </div>
                   </div>
@@ -400,23 +407,25 @@ export const PharmacyHub = () => {
 
         {/* RIGHT COLUMN: Feature 4 Bioequivalent Generic Substitution Router & Final Dispense */}
         <div className="lg:col-span-6 space-y-6">
-          {/* Feature 4: Bioequivalent Generic Substitution Router (Klimentidis et al., 2026) */}
-          <section className="clinical-card p-5 bg-white border border-[#141817]">
-            <div className="flex items-center justify-between pb-3 border-b border-[#CFD2CE] mb-4">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#0F6B53]" />
+          {/* Feature 4: Bioequivalent Generic Substitution Router */}
+          <section className="clinical-card p-6 bg-white border border-slate-200">
+            <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5" />
+                </div>
                 <div>
-                  <h2 className="font-headline font-bold text-base text-[#141817]">
+                  <h2 className="font-bold text-lg text-slate-900">
                     Bioequivalent Generic Substitution Router
                   </h2>
-                  <p className="text-[11px] font-mono text-[#5A605D]">
-                    DGDA Bioequivalence Certified Equivalence Database
+                  <p className="text-xs text-slate-500">
+                    DGDA Bioequivalence Certified Database
                   </p>
                 </div>
               </div>
             </div>
 
-            <p className="text-xs text-[#5A605D] leading-relaxed mb-3">
+            <p className="text-xs text-slate-600 leading-relaxed mb-4">
               When a prescribed brand is costly or unavailable, pharmacists can propose a verified bioequivalent generic substitute with transparent price comparison in Bangladeshi Taka (৳ BDT).
             </p>
 
@@ -424,42 +433,42 @@ export const PharmacyHub = () => {
               {bioequivalentPairs.map((pair, idx) => (
                 <div
                   key={idx}
-                  className={`p-3.5 rounded border text-xs transition-all ${
+                  className={`p-4 rounded-xl border text-xs transition-all ${
                     selectedGenericSub?.originalBrand === pair.originalBrand
-                      ? 'bg-[#E6F3EE] border-[#0F6B53] shadow-[2px_2px_0px_#0F6B53]'
-                      : 'bg-[#F4F3EF] border-[#CFD2CE]'
+                      ? 'bg-teal-50/80 border-teal-500 shadow-sm'
+                      : 'bg-slate-50/80 border-slate-200'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <span className="font-mono text-[10px] text-[#5A605D] block">ORIGINAL PRESCRIBED BRAND</span>
-                      <strong className="text-sm text-[#141817]">{pair.originalBrand}</strong>
-                      <span className="text-[11px] text-[#5A605D] block">
-                        {pair.originalManufacturer} • <strong className="text-[#141817]">৳{pair.originalPriceBdt.toFixed(2)}/unit</strong>
+                      <span className="text-[10px] text-slate-400 font-bold uppercase block tracking-wider">ORIGINAL PRESCRIBED BRAND</span>
+                      <strong className="text-sm text-slate-900">{pair.originalBrand}</strong>
+                      <span className="text-xs text-slate-500 block">
+                        {pair.originalManufacturer} • <strong className="text-slate-900">৳{pair.originalPriceBdt.toFixed(2)}/unit</strong>
                       </span>
                     </div>
 
                     <div className="text-right">
-                      <span className="font-mono text-[10px] text-[#0F6B53] font-bold block">VERIFIED SUBSTITUTE</span>
-                      <strong className="text-sm text-[#0F6B53]">{pair.substituteBrand}</strong>
-                      <span className="text-[11px] text-[#0F6B53] font-bold block">
+                      <span className="text-[10px] text-teal-700 font-bold uppercase block tracking-wider">VERIFIED SUBSTITUTE</span>
+                      <strong className="text-sm text-teal-700">{pair.substituteBrand}</strong>
+                      <span className="text-xs text-teal-800 font-bold block">
                         ৳{pair.substitutePriceBdt.toFixed(2)}/unit (Save {pair.savingsPercent})
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-[10px] font-mono text-[#5A605D] mt-2 pt-2 border-t border-[#CFD2CE]">
+                  <p className="text-[10px] text-slate-500 mt-2 pt-2 border-t border-slate-200/80 font-mono">
                     {pair.bioequivalenceStatus}
                   </p>
 
-                  <div className="mt-2 flex justify-end">
+                  <div className="mt-2.5 flex justify-end">
                     <button
                       type="button"
                       onClick={() => setSelectedGenericSub(pair)}
-                      className={`text-xs px-2.5 py-1 rounded font-bold border transition-all ${
+                      className={`text-xs px-3 py-1.5 rounded-lg font-bold border transition-all ${
                         selectedGenericSub?.originalBrand === pair.originalBrand
-                          ? 'bg-[#0F6B53] text-white border-[#0B4E3C]'
-                          : 'bg-white text-[#141817] border-[#141817] hover:bg-[#E8E6DF]'
+                          ? 'bg-teal-600 text-white border-teal-700 shadow-sm'
+                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'
                       }`}
                     >
                       {selectedGenericSub?.originalBrand === pair.originalBrand ? 'Selected for Dispense' : 'Select Substitution'}
@@ -471,64 +480,75 @@ export const PharmacyHub = () => {
           </section>
 
           {/* Ready to Dispense Prescription Station */}
-          <section className="clinical-card p-5 bg-white border border-[#141817]">
-            <div className="flex items-center justify-between pb-3 border-b border-[#CFD2CE] mb-4">
-              <div className="flex items-center gap-2">
-                <FileCheck className="w-5 h-5 text-[#0F6B53]" />
-                <h2 className="font-headline font-bold text-base text-[#141817]">
-                  Verified Dispensing & Adherence Station
+          <section className="clinical-card p-6 bg-white border border-slate-200">
+            <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center">
+                  <FileCheck className="w-5 h-5" />
+                </div>
+                <h2 className="font-bold text-lg text-slate-900">
+                  Verified Dispensing Station
                 </h2>
               </div>
             </div>
 
             {pendingRxForDispensing.length === 0 ? (
-              <div className="p-6 text-center text-xs text-[#5A605D] bg-[#F4F3EF] rounded border border-dashed border-[#CFD2CE]">
+              <div className="p-6 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
                 No prescriptions currently awaiting dispensing.
               </div>
             ) : (
               <div className="space-y-4">
                 {pendingRxForDispensing.map((rx) => (
-                  <div key={rx.id} className="p-4 bg-[#F4F3EF] border border-[#141817] rounded shadow-[2px_2px_0px_#141817] text-xs space-y-3">
+                  <div key={rx.id} className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-3 shadow-2xs">
                     <div className="flex items-start justify-between">
                       <div>
-                        <span className="font-mono font-bold text-[#141817] text-sm block">{rx.id}</span>
-                        <span className="text-[#5A605D]">Patient: {rx.patientName} • Issued by {rx.doctorName}</span>
+                        <span className="font-mono font-bold text-slate-900 text-sm block">{rx.id}</span>
+                        <span className="text-slate-500">Patient: {rx.patientName} • Dr. {rx.doctorName}</span>
                       </div>
                       <AwareBadge classification={rx.medications[0]?.awareClass} size="compact" />
                     </div>
 
-                    <div className="p-2.5 bg-white rounded border border-[#CFD2CE]">
-                      <span className="font-bold text-[#141817] block">
+                    <div className="p-3 bg-white rounded-lg border border-slate-200">
+                      <span className="font-bold text-slate-900 block">
                         Prescribed: {rx.medications[0]?.name}
                       </span>
-                      <span className="text-[11px] text-[#5A605D] block">
+                      <span className="text-slate-500 block">
                         Dosage: {rx.medications[0]?.dosage} ({rx.medications[0]?.duration})
                       </span>
                       {selectedGenericSub && selectedGenericSub.originalBrand === rx.medications[0]?.name && (
-                        <div className="mt-1 pt-1 border-t border-[#0F6B53]/30 text-[11px] text-[#0F6B53] font-bold">
+                        <div className="mt-1.5 pt-1.5 border-t border-teal-100 text-[11px] text-teal-700 font-bold">
                           ✓ Bioequivalent generic selected: {selectedGenericSub.substituteBrand} (Saving ৳{selectedGenericSub.savingsBdt.toFixed(2)})
                         </div>
                       )}
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => {
-                        dispensePrescription(
-                          rx.id,
-                          activePharmacy.id,
-                          `Dispensed by ${activePharmacy.pharmacistInCharge}`,
-                          selectedGenericSub
-                        );
-                        setSelectedGenericSub(null);
-                      }}
-                      className="clinical-btn clinical-btn-primary w-full py-2 text-xs"
-                    >
-                      <Check className="w-4 h-4" />
-                      <span>
-                        Authorize Final Dispense & Initialize Adherence Telemetry
-                      </span>
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          dispensePrescription(
+                            rx.id,
+                            activePharmacy.id,
+                            `Dispensed by ${activePharmacy.pharmacistInCharge}`,
+                            selectedGenericSub
+                          );
+                          setSelectedGenericSub(null);
+                        }}
+                        className="clinical-btn clinical-btn-primary flex-1 py-2 text-xs"
+                      >
+                        <Check className="w-4 h-4" />
+                        <span>Authorize Dispense & Start Adherence</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setSelectedRxForPrint(rx)}
+                        className="clinical-btn clinical-btn-secondary py-2 text-xs px-3"
+                        title="Print or Download Full Prescription Slip"
+                      >
+                        <Printer className="w-4 h-4 text-teal-600" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -536,6 +556,15 @@ export const PharmacyHub = () => {
           </section>
         </div>
       </div>
+
+      {/* Official Prescription Download & Print Modal */}
+      {selectedRxForPrint && (
+        <PrescriptionPrintModal
+          prescription={selectedRxForPrint}
+          patient={patients.find(p => p.id === selectedRxForPrint.patientId)}
+          onClose={() => setSelectedRxForPrint(null)}
+        />
+      )}
     </div>
   );
 };

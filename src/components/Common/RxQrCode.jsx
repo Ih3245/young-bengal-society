@@ -12,7 +12,7 @@ export const RxQrCode = ({ payload = '', hash = '', token = '' }) => {
       width: 140,
       margin: 1,
       color: {
-        dark: '#141817',
+        dark: '#0F172A',
         light: '#FFFFFF'
       }
     })
@@ -21,27 +21,27 @@ export const RxQrCode = ({ payload = '', hash = '', token = '' }) => {
   }, [payload, hash, token]);
 
   return (
-    <div className="flex flex-col items-center p-3 bg-white border border-[#141817] rounded shadow-[2px_2px_0px_#141817]">
-      <div className="flex items-center gap-1.5 w-full justify-between pb-2 mb-2 border-b border-[#CFD2CE] text-[10px] font-mono text-[#5A605D]">
-        <span className="flex items-center gap-1 font-bold text-[#0F6B53]">
-          <ShieldCheck className="w-3.5 h-3.5" /> VERIFIED RX TOKEN
+    <div className="flex flex-col items-center p-3 bg-white border border-slate-200 rounded-xl shadow-xs">
+      <div className="flex items-center gap-1.5 w-full justify-between pb-1.5 mb-2 border-b border-slate-100 text-[10px] font-mono text-slate-500">
+        <span className="flex items-center gap-1 font-bold text-teal-700">
+          <ShieldCheck className="w-3.5 h-3.5" /> VERIFIED RX
         </span>
         <span className="truncate max-w-[80px]">{token.slice(-7)}</span>
       </div>
 
-      <div className="w-[120px] h-[120px] flex items-center justify-center bg-[#F4F3EF] border border-[#CFD2CE] rounded">
+      <div className="w-[110px] h-[110px] flex items-center justify-center bg-slate-50 border border-slate-200 rounded-lg overflow-hidden">
         {dataUrl ? (
-          <img src={dataUrl} alt={`QR Code for ${token}`} className="w-full h-full object-contain" />
+          <img src={dataUrl} alt={`QR Code for ${token}`} className="w-full h-full object-contain p-1" />
         ) : (
-          <QrCode className="w-8 h-8 text-[#5A605D] animate-pulse" />
+          <QrCode className="w-8 h-8 text-slate-400 animate-pulse" />
         )}
       </div>
 
       <div className="mt-2 text-center w-full">
-        <div className="text-[11px] font-mono font-bold text-[#141817] tracking-tight truncate">
+        <div className="text-[11px] font-mono font-bold text-slate-900 tracking-tight truncate">
           {token}
         </div>
-        <div className="text-[9px] font-mono text-[#5A605D] truncate mt-0.5">
+        <div className="text-[9px] font-mono text-slate-400 truncate mt-0.5">
           SHA: {hash ? hash.slice(0, 16) : 'VERIFIED_HASH'}
         </div>
       </div>
